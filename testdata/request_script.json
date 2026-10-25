@@ -1,0 +1,16 @@
+{
+  "script": "Welcome back to the channel. Today we build a simple budget that actually works. Start with your income, then list fixed costs, then decide what to save first.",
+  "aspect_ratios": [
+    "16:9",
+    "9:16"
+  ],
+  "voice": "en-IN-female",
+  "style": "bright, modern, real-world footage",
+  "avoid": [
+    "alcohol"
+  ],
+  "captions": {
+    "burn_in": true,
+    "srt": true
+  }
+}

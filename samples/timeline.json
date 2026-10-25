@@ -1,0 +1,58 @@
+{
+  "aspect_ratios": [
+    "16:9"
+  ],
+  "scenes": [
+    {
+      "index": 0,
+      "narration_text": "Save money every month.",
+      "start_s": 0.0,
+      "end_s": 1.538,
+      "clip": {
+        "id": "mk_money",
+        "description": "money savings coins finance budget growth",
+        "source": "mock:generator",
+        "licence": "CC0 (synthetic placeholder)",
+        "attribution": "IncuBrix mock",
+        "ai_generated": true,
+        "url": null
+      },
+      "reason": "semantic match score 0.3536",
+      "relevance_score": 2.41
+    },
+    {
+      "index": 1,
+      "narration_text": "Small habits add up over time.",
+      "start_s": 1.538,
+      "end_s": 3.846,
+      "clip": {
+        "id": "mk_nature",
+        "description": "nature landscape trees outdoors calm",
+        "source": "mock:generator",
+        "licence": "CC0 (synthetic placeholder)",
+        "attribution": "IncuBrix mock",
+        "ai_generated": true,
+        "url": null
+      },
+      "reason": "semantic match score 0.124",
+      "relevance_score": 1.5
+    },
+    {
+      "index": 2,
+      "narration_text": "Track your spending and set a clear goal.",
+      "start_s": 3.846,
+      "end_s": 6.923,
+      "clip": {
+        "id": "mk_tech",
+        "description": "technology device screen typing laptop",
+        "source": "mock:generator",
+        "licence": "CC0 (synthetic placeholder)",
+        "attribution": "IncuBrix mock",
+        "ai_generated": true,
+        "url": null
+      },
+      "reason": "semantic match score 0.2481",
+      "relevance_score": 1.99
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+openapi: 3.1.0
+info:
+  title: IncuBrix B-roll Video Engine
+  version: "0.1.0"
+  description: >
+    Turns a voiceover or script into a finished, licence-clean B-roll video,
+    scene by scene. All routes are under /api/v1/. Slow work runs as a background
+    job: POST returns 202 with a job id, and GET /api/v1/jobs/{job_id} reports
+    status and result links.
+servers:
+  - url: http://localhost:8000
+paths:
+  /health:
+    get:
+      summary: Liveness probe
+      responses:
+        "200":
+          description: Service is up
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {status: {type: string}}
+  /ready:
+    get:
+      summary: Readiness probe
+      responses:
+        "200":
+          description: Service is ready
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: {type: string}
+                  storage: {type: string}
+                  mock_mode: {type: boolean}
+                  ffmpeg: {type: string}
+  /api/v1/broll/jobs:
+    post:
+      summary: Create a B-roll job
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema: {type: string}
+          description: >
+            Same key returns the same job and never repeats the work
+            (Integration Standard point 4).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BrollRequest"
+      responses:
+        "202":
+          description: Job accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id: {type: string}
+                  status: {type: string}
+                  links:
+                    type: object
+                    additionalProperties: {type: string}
+        "400":
+          $ref: "#/components/responses/Error"
+        "422":
+          $ref: "#/components/responses/Error"
+  /api/v1/jobs/{job_id}:
+    get:
+      summary: Get job status, progress and result links
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: Job status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobStatus"
+        "404":
+          $ref: "#/components/responses/Error"
+components:
+  responses:
+    Error:
+      description: Standard error body
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  schemas:
+    BrollRequest:
+      type: object
+      description: Provide exactly one of audio_url, script or scenes.
+      properties:
+        audio_url: {type: string, description: URL or path to a voiceover (mp3, wav, m4a)}
+        script: {type: string, description: Plain-text script; narration is generated}
+        scenes:
+          type: array
+          items:
+            type: object
+            properties:
+              text: {type: string}
+              visual_hint: {type: string}
+        voice: {type: string, default: en-IN-female}
+        aspect_ratios:
+          type: array
+          items: {type: string, enum: ["16:9", "9:16", "1:1"]}
+          default: ["16:9"]
+        style: {type: string}
+        avoid:
+          type: array
+          items: {type: string}
+        captions:
+          type: object
+          properties:
+            burn_in: {type: boolean, default: true}
+            srt: {type: boolean, default: true}
+    JobStatus:
+      type: object
+      properties:
+        job_id: {type: string}
+        status: {type: string, enum: [queued, running, succeeded, failed]}
+        progress: {type: integer, minimum: 0, maximum: 100}
+        result:
+          type: object
+          nullable: true
+          properties:
+            links:
+              type: object
+              additionalProperties: {type: string}
+            timeline: {type: object}
+            manifest: {type: object}
+        error:
+          type: object
+          nullable: true
+        warnings:
+          type: array
+          items: {type: string}
+    ErrorBody:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code: {type: string}
+            message: {type: string}
+            retryable: {type: boolean}
+            details: {type: object}

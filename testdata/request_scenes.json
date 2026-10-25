@@ -1,0 +1,23 @@
+{
+  "scenes": [
+    {
+      "text": "Welcome to the channel.",
+      "visual_hint": "friendly host waving"
+    },
+    {
+      "text": "Cloud computing is changing how teams work.",
+      "visual_hint": "servers and data centre"
+    },
+    {
+      "text": "Here is how to get started today.",
+      "visual_hint": "person typing on a laptop"
+    }
+  ],
+  "aspect_ratios": [
+    "1:1"
+  ],
+  "captions": {
+    "burn_in": false,
+    "srt": true
+  }
+}

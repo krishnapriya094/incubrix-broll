@@ -1,0 +1,12 @@
+.venv
+venv
+data
+__pycache__
+*.pyc
+.pytest_cache
+samples
+piper_voices
+.env
+batch_results
+.git
+.gitignore

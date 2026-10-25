@@ -1,0 +1,5 @@
+# Free / local providers - no API keys, all commercially licensed.
+faster-whisper>=1.0.0
+piper-tts>=1.2.0
+fastembed>=0.3.0
+numpy>=1.26

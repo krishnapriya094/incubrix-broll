@@ -1,0 +1,43 @@
+{
+  "job_id": "job_7426a17ad2ee43bdaee5",
+  "models_and_providers": {
+    "stt": "mock",
+    "tts": "mock",
+    "embeddings": "mock",
+    "footage_sources": [
+      "mock:generator",
+      "mock:generator",
+      "mock:generator"
+    ]
+  },
+  "settings": {
+    "aspect_ratios": [
+      "16:9"
+    ],
+    "voice": "en-IN-female",
+    "style": "bright, modern, real-world footage",
+    "avoid": [
+      "alcohol"
+    ],
+    "captions": {
+      "burn_in": false,
+      "srt": true
+    }
+  },
+  "seed": null,
+  "scene_count": 3,
+  "elapsed_s": 31.4,
+  "cost_estimate_usd": 0.0,
+  "warnings": [],
+  "rights": {
+    "licences": [
+      "CC0 (synthetic placeholder)"
+    ],
+    "ai_generated_clips": [
+      "mk_money",
+      "mk_nature",
+      "mk_tech"
+    ],
+    "note": "Every clip records its source, licence and attribution in timeline.json."
+  }
+}
