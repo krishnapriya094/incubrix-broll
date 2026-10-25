@@ -221,7 +221,7 @@ def _normalise(ffmpeg: str, src: Path, dest: Path, size: tuple[int, int], durati
           f"crop={w}:{h},fps=30,format=yuv420p")
     _run_ffmpeg([ffmpeg, "-y", "-stream_loop", "-1", "-i", str(src), "-t",
                  f"{max(0.5, duration):.3f}", "-vf", vf, "-an", "-c:v", "libx264",
-                 "-preset", "veryfast", "-threads", "1", "-pix_fmt", "yuv420p", str(dest)])
+                 "-preset", "ultrafast", "-threads", "1", "-pix_fmt", "yuv420p", str(dest)])
 
 
 def write_srt(scenes: list[dict], path: Path) -> None:
@@ -287,7 +287,7 @@ def render_videos(scenes: list[dict], clips: list[Clip], narration: Path, ratios
             for path in norm_paths:
                 fh.write(f"file '{path.resolve().as_posix()}'\n")
         _run_ffmpeg([ffmpeg, "-y", "-f", "concat", "-safe", "0", "-i", str(concat_list),
-                     "-c:v", "libx264", "-preset", "veryfast", "-threads", "1",
+                     "-c:v", "libx264", "-preset", "ultrafast", "-threads", "1",
                      "-pix_fmt", "yuv420p", "-an", str(silent)])
         out = work / f"video_{ratio.replace(':', 'x')}.mp4"
         try:
